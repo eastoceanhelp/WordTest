@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="js/app.js"></script>
+<style>
+td {
+  border: solid 1px;
+}
+body {
+  font-family: Meiryo;
+}
+#main {
+  max-width: 600px;
+  margin:  0 auto;
+}
+</style>
+</head>
+
+<body>
+  <div id="main">
+    <div>
+      データ：<input type="file" id="dataFile" />
+    </div>
+    <div>
+        表示する範囲を番号で指定してください。<br>
+        <input type="number" id="from" />～<input type="number" id="to" /><button id="showWords">表示</button>
+        <table id="wordInfoTable" style="width:100%;">
+        <thead>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><button id="clearResult1">クリア</button></td>
+          <td><button id="clearResult2">クリア</button></td>
+        </tr>
+        <tr>
+          <td style="width:10%;">番号</td>
+          <td style="width:30%;">単語</td>
+          <td style="width:40;">意味<br><button id="hideAllSense">非表示</button></td>
+          <td style="width:10%;">１回目<br><button id="hideShowResult1OK">×のみ</button></td>
+          <td style="width:10%;">２回目<br><button id="hideShowResult2OK">×のみ</button></td>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+        </table>
+    </div>
+
+  </div>
+</body>
+</html>
