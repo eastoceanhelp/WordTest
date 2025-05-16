@@ -133,7 +133,7 @@ $( function()
 	{
 		let action = hideShowResultButton.text();
 		let rows = $( "#wordInfoTable" ).find( ".wordRow" );
-		if( action === "×のみ" )
+		if( action === "×" )
 		{
 			for( let i = 0; i < rows.length; i++ )
 			{
@@ -145,7 +145,7 @@ $( function()
 					row.hide();
 				}
 			}
-			hideShowResultButton.text( "全て" );
+			hideShowResultButton.text( "全" );
 		}
 		else
 		{
@@ -154,7 +154,7 @@ $( function()
 				let row = $( rows[ i ] );
 				row.show();
 			}
-			hideShowResultButton.text( "×のみ" );
+			hideShowResultButton.text( "×" );
 		}
 	}
 
