@@ -20,6 +20,7 @@ $( function()
 		{
 			from = 1;
 		}
+		from = parseInt( from );
 		if( from <= 0 )
 		{
 			alert( "開始番号は正の値を指定してください。" );
@@ -32,6 +33,7 @@ $( function()
 		{
 			to = allWordInfos.length;
 		}
+		to = parseInt( to );
 		if( to <= 0 )
 		{
 			alert( "終了番号は正の値を指定してください。" );
@@ -41,8 +43,17 @@ $( function()
 
 		if( from > to )
 		{
-			alert( "開始番号が終了番号より大きいです。" );
+			alert( "開始番号(" + from + ")が終了番号(" + to + ")より大きいです。" );
 			return;
+		}
+
+		initTable();
+		function initTable()
+		{
+			$( "#hideShowAllSense" ).text( "非表示" );
+			$( "#hideShowResult1OK" ).text( "×" );
+			$( "#hideShowResult2OK" ).text( "×" );
+			$( "#tableBody" ).empty();
 		}
 
 		let wordInfoTable = $( "#tableBody" );
@@ -53,7 +64,7 @@ $( function()
 			let wordInfo = wordInfos[ i ];
 			let row = $( '<tr class="wordRow"></tr>' );
 
-			let noCol = $( "<td>" + wordInfo[ "no" ] + "</td>");
+			let noCol = $( '<td class="no">' + wordInfo[ "no" ] + "</td>");
 			row.append( noCol );
 
 			let wordCol = $( "<td>" + wordInfo[ "word" ] + "</td>");
@@ -108,18 +119,94 @@ $( function()
 		}
 	} );
 
-	$( "#hideAllSense" ).click( function()
+	$( "#minus10" ).click( function()
 	{
-		let hideAllSenseButton = $( this );
-		let action = hideAllSenseButton.text();
+		slideRange( -10 );
+	} );
+
+	$( "#plus10" ).click( function()
+	{
+		slideRange( 10 );
+	} );
+
+	$( "#minus100" ).click( function()
+	{
+		slideRange( -100 );
+	} );
+
+	$( "#plus100" ).click( function()
+	{
+		slideRange( 100 );
+	} );
+
+	function slideRange( slideNumber )
+	{
+		let rows = $( "#tableBody" ).find( "tr" );
+		if( rows.length == 0)
+		{
+			console.log( "no rows" );
+			return;
+		}
+
+		let from = getFrom();
+		function getFrom()
+		{
+			let startRow = $( rows[ 0 ] );
+			let noCol = startRow.find( "td.no" )[ 0 ];
+			let no = parseInt( $( noCol ).text() );
+			return no;
+		}
+
+		let to = getTo();
+		function getTo()
+		{
+			let startRow = $( rows[ rows.length - 1 ] );
+			let noCol = startRow.find( "td.no" )[ 0 ];
+			let no = parseInt( $( noCol ).text() );
+			return no;
+		}
+//		console.log( from + " > " + to );
+
+		from += slideNumber;
+		to += slideNumber;
+		let lastNo = allWordInfos[ allWordInfos.length - 1 ][ "no" ];
+		if( from > lastNo )
+		{
+			from = lastNo;
+		}
+		if( to > lastNo )
+		{
+			to = lastNo;
+		}
+
+		let firstNo = allWordInfos[ 0 ][ "no" ];
+		if( from < firstNo )
+		{
+			from = firstNo;
+		}
+		if( to < firstNo )
+		{
+			to = firstNo;
+		}
+//		console.log( from + " > " + to);
+
+		$( "#from" ).val( from );
+		$( "#to" ).val( to );
+		$( "#showWords" ).click();
+	}
+
+	$( "#hideShowAllSense" ).click( function()
+	{
+		let hideShowAllSenseButton = $( this );
+		let action = hideShowAllSenseButton.text();
 		if( action === "非表示" )
 		{
-			hideAllSenseButton.text( "表示" );
+			hideShowAllSenseButton.text( "表示" );
 			$( "#wordInfoTable" ).find( ".sense" ).css( "visibility", "hidden" );
 		}
 		else
 		{
-			hideAllSenseButton.text( "非表示" );
+			hideShowAllSenseButton.text( "非表示" );
 			$( "#wordInfoTable" ).find( ".sense" ).css( "visibility", "visible" );
 		}
 	} );
