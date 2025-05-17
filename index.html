@@ -24,6 +24,9 @@ body {
     width: 100%;
   }
 }
+#dataName {
+  font-size: 1.5rem;
+}
 .range {
   width: 80px;
 }
@@ -51,31 +54,32 @@ td {
       データ：<input type="file" id="dataFile" />
     </div>
     <div>
-        表示する範囲を番号で指定してください。<br>
-        <input type="number" id="from" class="range" />(<span id="minNo"></span>)～<input type="number" id="to" class="range" />(<span id="maxNo"></span>)<button id="showWords">表示</button>
-        <div id="slideButtons">
-          <button id="minus10">＜１０</button><button id="plus10">１０＞</button><button id="minus100">＜１００</button><button id="plus100">１００＞</button>
-        </div>
-        <table id="wordInfoTable">
-          <thead>
-            <tr>
-              <td style="width:10%;"></td>
-              <td style="width:20%;"></td>
-              <td style="width:50%;"></td>
-              <td style="width:10%;"><button id="clearResult1">AC</button></td>
-              <td style="width:10%;"><button id="clearResult2">AC</button></td>
-            </tr>
-            <tr>
-              <td>番号</td>
-              <td>単語</td>
-              <td>意味<br><button id="hideShowAllSense">非表示</button></td>
-              <td>１<br><button id="hideShowResult1OK">×</button></td>
-              <td>２<br><button id="hideShowResult2OK">×</button></td>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-          </tbody>
-        </table>
+      <div id="dataName">＜＞</div>
+      表示する範囲を番号で指定してください。<br>
+      <input type="number" id="from" class="range" />(<span id="minNo"></span>)～<input type="number" id="to" class="range" />(<span id="maxNo"></span>)<button id="showWords">表示</button>
+      <div id="slideButtons">
+        <button id="minus10">＜１０</button><button id="plus10">１０＞</button><button id="minus100">＜１００</button><button id="plus100">１００＞</button>
+      </div>
+      <table id="wordInfoTable">
+        <thead>
+          <tr>
+            <td style="width:10%;"></td>
+            <td style="width:20%;"></td>
+            <td style="width:50%;"></td>
+            <td style="width:10%;"><button id="clearResult1">AC</button></td>
+            <td style="width:10%;"><button id="clearResult2">AC</button></td>
+          </tr>
+          <tr>
+            <td>番号</td>
+            <td>単語</td>
+            <td>意味<br><button id="hideShowAllSense">非表示</button></td>
+            <td>１<br><button id="hideShowResult1OK">×</button></td>
+            <td>２<br><button id="hideShowResult2OK">×</button></td>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+      </table>
     </div>
   </div>
 

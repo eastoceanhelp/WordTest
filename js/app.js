@@ -9,6 +9,13 @@ $( function()
 		reader.readAsText( dataFile );
 		reader.onload = function()
 		{
+			let dataName = JSON.parse( reader.result )[ "dataName" ];
+			if( dataName === undefined )
+			{
+				dataName = "タイトル";
+			}
+			$( "#dataName" ).text( "＜" + dataName + "＞" );
+			
 			allWordInfos = JSON.parse( reader.result )[ "wordInfos" ];
 			let minNo = parseInt( allWordInfos[ 0 ][ "no" ] );
 			$( "#minNo" ).text( minNo );
