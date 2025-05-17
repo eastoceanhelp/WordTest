@@ -82,16 +82,16 @@ $( function()
 
 			let word = $( clone.querySelector( ".word" ) );
 			word.text( wordInfo[ "word" ] );
-			let wordCol = $( clone.querySelector( ".wordCol" ) );
-			wordCol.click( function()
+			let wordCell = $( clone.querySelector( ".wordCell" ) );
+			wordCell.click( function()
 			{
 				toggleVisibility( $( $( this ).children( ".word" )[ 0 ] ) );
 			} );
 
 			let sense = $( clone.querySelector( ".sense" ) );
 			sense.text( wordInfo[ "sense" ] );
-			let senseCol = $( clone.querySelector( ".senseCol" ) );
-			senseCol.click( function()
+			let senseCell = $( clone.querySelector( ".senseCell" ) );
+			senseCell.click( function()
 			{
 				toggleVisibility( $( $( this ).children( ".sense" )[ 0 ] ) );
 			} );
@@ -109,14 +109,14 @@ $( function()
 				}
 			}
 
-			let result1Col = $( clone.querySelector( ".result1Col" ) );
-			result1Col.click( function()
+			let result1Cell = $( clone.querySelector( ".result1Cell" ) );
+			result1Cell.click( function()
 			{
 				toggleResult( $( this ) );
 			} );
 
-			let result2Col = $( clone.querySelector( ".result2Col" ) );
-			result2Col.click( function()
+			let result2Cell = $( clone.querySelector( ".result2Cell" ) );
+			result2Cell.click( function()
 			{
 				toggleResult( $( this ) );
 			} );
@@ -246,12 +246,12 @@ $( function()
 
 	$( "#hideShowResult1OK" ).click( function()
 	{
-		hideShowResult( $( this ), "result1Col" );
+		hideShowResult( $( this ), "result1Cell" );
 	} );
 
 	$( "#hideShowResult2OK" ).click( function()
 	{
-		hideShowResult( $( this ), "result2Col" );
+		hideShowResult( $( this ), "result2Cell" );
 	} );
 
 	function hideShowResult( hideShowResultButton, resultClass )
@@ -263,9 +263,9 @@ $( function()
 			for( let i = 0; i < rows.length; i++ )
 			{
 				let row = $( rows[ i ] );
-				let result1Col = $( row.find( "." + resultClass )[ 0 ] );
-				let result1ColText = result1Col.text();
-				if( result1ColText === "" )
+				let result1Cell = $( row.find( "." + resultClass )[ 0 ] );
+				let result1CellText = result1Cell.text();
+				if( result1CellText === "" )
 				{
 					row.hide();
 				}
@@ -285,12 +285,12 @@ $( function()
 
 	$( "#clearResult1" ).click( function()
 	{
-		clearResult( "result1Col" );
+		clearResult( "result1Cell" );
 	} );
 
 	$( "#clearResult2" ).click( function()
 	{
-		clearResult( "result2Col" );
+		clearResult( "result2Cell" );
 	} );
 
 	function clearResult( resultClass )
