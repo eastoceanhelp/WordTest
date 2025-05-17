@@ -10,16 +10,18 @@ body {
   display: flex;
   flex-direction: column;
 }
+#main {
+  flex: 1;
+    margin:  0 auto;
+}
 @media(min-width:751px) {
   #main {
     max-width: 600px;
-    margin:  0 auto;
   }
 }
 @media(max-width:750px) {
   #main {
     width: 100%;
-    margin:  0 auto;
   }
 }
 .range {
@@ -28,11 +30,13 @@ body {
 #slideButtons {
   margin-top: 20px;
 }
+#wordInfoTable {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
 td {
   border: solid 1px;
-}
-#main {
-  flex: 1;
 }
 </style>
 </head>
@@ -48,7 +52,7 @@ td {
         <div id="slideButtons">
           <button id="minus10">＜１０</button><button id="plus10">１０＞</button><button id="minus100">＜１００</button><button id="plus100">１００＞</button>
         </div>
-        <table id="wordInfoTable" style="width:100%;">
+        <table id="wordInfoTable">
           <thead>
             <tr>
               <td></td>
