@@ -60,6 +60,7 @@ $( function()
 		initTable();
 		function initTable()
 		{
+			$( "#hideShowAllWord" ).text( "非表示" );
 			$( "#hideShowAllSense" ).text( "非表示" );
 			$( "#hideShowResult1OK" ).text( "×" );
 			$( "#hideShowResult2OK" ).text( "×" );
@@ -79,28 +80,43 @@ $( function()
 			let noCol = $( clone.querySelector( ".no" ) );
 			noCol.text( wordInfo[ "no" ] );
 
-			let wordCol = $( clone.querySelector( ".word" ) );
-			wordCol.text( wordInfo[ "word" ] );
+			let word = $( clone.querySelector( ".word" ) );
+			word.text( wordInfo[ "word" ] );
+			let wordCol = $( clone.querySelector( ".wordCol" ) );
+			wordCol.click( function()
+			{
+				toggleVisibility( $( $( this ).children( ".word" )[ 0 ] ) );
+			} );
 
 			let sense = $( clone.querySelector( ".sense" ) );
 			sense.text( wordInfo[ "sense" ] );
 			let senseCol = $( clone.querySelector( ".senseCol" ) );
 			senseCol.click( function()
 			{
-				let senseElem = $( $( this ).children( ".sense" )[ 0 ] );
-				let visibility = senseElem.css( "visibility" );
+				toggleVisibility( $( $( this ).children( ".sense" )[ 0 ] ) );
+			} );
+
+			function toggleVisibility( element )
+			{
+				let visibility = element.css( "visibility" );
 				if( visibility === "visible" )
 				{
-					senseElem.css( "visibility", "hidden" );
+					element.css( "visibility", "hidden" );
 				}
 				else
 				{
-					senseElem.css( "visibility", "visible" );
+					element.css( "visibility", "visible" );
 				}
-			} );
+			}
 
 			let result1Col = $( clone.querySelector( ".result1Col" ) );
 			result1Col.click( function()
+			{
+				toggleResult( $( this ) );
+			} );
+
+			let result2Col = $( clone.querySelector( ".result2Col" ) );
+			result2Col.click( function()
 			{
 				toggleResult( $( this ) );
 			} );
@@ -117,12 +133,6 @@ $( function()
 					element.text( "" );
 				}
 			}
-
-			let result2Col = $( clone.querySelector( ".result2Col" ) );
-			result2Col.click( function()
-			{
-				toggleResult( $( this ) );
-			} );
 
 			document.getElementById( "tableBody" ).appendChild( clone );
 		}
@@ -174,7 +184,6 @@ $( function()
 			let no = parseInt( $( noCol ).text() );
 			return no;
 		}
-//		console.log( from + " > " + to );
 
 		from += slideNumber;
 		to += slideNumber;
@@ -197,12 +206,27 @@ $( function()
 		{
 			to = firstNo;
 		}
-//		console.log( from + " > " + to);
 
 		$( "#from" ).val( from );
 		$( "#to" ).val( to );
 		$( "#showWords" ).click();
 	}
+
+	$( "#hideShowAllWord" ).click( function()
+	{
+		let hideShowAllWordButton = $( this );
+		let action = hideShowAllWordButton.text();
+		if( action === "非表示" )
+		{
+			hideShowAllWordButton.text( "表示" );
+			$( "#wordInfoTable" ).find( ".Word" ).css( "visibility", "hidden" );
+		}
+		else
+		{
+			hideShowAllWordButton.text( "非表示" );
+			$( "#wordInfoTable" ).find( ".Word" ).css( "visibility", "visible" );
+		}
+	} );
 
 	$( "#hideShowAllSense" ).click( function()
 	{
@@ -223,6 +247,11 @@ $( function()
 	$( "#hideShowResult1OK" ).click( function()
 	{
 		hideShowResult( $( this ), "result1Col" );
+	} );
+
+	$( "#hideShowResult2OK" ).click( function()
+	{
+		hideShowResult( $( this ), "result2Col" );
 	} );
 
 	function hideShowResult( hideShowResultButton, resultClass )
@@ -254,14 +283,14 @@ $( function()
 		}
 	}
 
-	$( "#hideShowResult2OK" ).click( function()
-	{
-		hideShowResult( $( this ), "result2Col" );
-	} );
-
 	$( "#clearResult1" ).click( function()
 	{
 		clearResult( "result1Col" );
+	} );
+
+	$( "#clearResult2" ).click( function()
+	{
+		clearResult( "result2Col" );
 	} );
 
 	function clearResult( resultClass )
@@ -272,10 +301,5 @@ $( function()
 			$( cols[ i ] ).text( "" );
 		}
 	}
-
-	$( "#clearResult2" ).click( function()
-	{
-		clearResult( "result2Col" );
-	} );
 
 });

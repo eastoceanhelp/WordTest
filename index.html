@@ -72,7 +72,7 @@ td {
           </tr>
           <tr>
             <td>番号</td>
-            <td>単語</td>
+            <td>単語<br><button id="hideShowAllWord">非表示</button></td>
             <td>意味<br><button id="hideShowAllSense">非表示</button></td>
             <td>１<br><button id="hideShowResult1OK">×</button></td>
             <td>２<br><button id="hideShowResult2OK">×</button></td>
@@ -85,7 +85,7 @@ td {
       <template id="wordRowTemplate">
           <tr class="wordRow">
             <td class="no"></td>
-            <td class="word"></td>
+            <td class="wordCol"><span class="word"></span></td>
             <td class="senseCol"><span class="sense"></span></td>
             <td class="result1Col"></td>
             <td class="result2Col"></td>
