@@ -38,7 +38,6 @@ $( function()
 			alert( "開始番号は正の値を指定してください。" );
 			return;
 		}
-//		console.log( "from:" + from );
 
 		let to = $( "#to" ).val();
 		if( to === "" )
@@ -51,7 +50,6 @@ $( function()
 			alert( "終了番号は正の値を指定してください。" );
 			return;
 		}
-//		console.log( "to:" + to );
 
 		if( from > to )
 		{
@@ -71,19 +69,22 @@ $( function()
 		let wordInfoTable = $( "#tableBody" );
 		wordInfoTable.empty();
 		let wordInfos = allWordInfos.filter( ( wordInfo ) => from <= wordInfo[ "no" ] && wordInfo[ "no" ] <= to );
-		for(var i = 0; i < wordInfos.length; i++)
+		for(let i = 0; i < wordInfos.length; i++)
 		{
 			let wordInfo = wordInfos[ i ];
-			let row = $( '<tr class="wordRow"></tr>' );
 
-			let noCol = $( '<td class="no">' + wordInfo[ "no" ] + "</td>");
-			row.append( noCol );
+			let wordRowTemplate = document.getElementById( "wordRowTemplate" );
+			let clone = wordRowTemplate.content.cloneNode( true );
 
-			let wordCol = $( "<td>" + wordInfo[ "word" ] + "</td>");
-			row.append( wordCol );
+			let noCol = $( clone.querySelector( ".no" ) );
+			noCol.text( wordInfo[ "no" ] );
 
-			let senseCol = $( "<td></td>");
-			let sense = $( '<span class="sense">' + wordInfo[ "sense" ] + "</span>" );
+			let wordCol = $( clone.querySelector( ".word" ) );
+			wordCol.text( wordInfo[ "word" ] );
+
+			let sense = $( clone.querySelector( ".sense" ) );
+			sense.text( wordInfo[ "sense" ] );
+			let senseCol = $( clone.querySelector( ".senseCol" ) );
 			senseCol.click( function()
 			{
 				let senseElem = $( $( this ).children( ".sense" )[ 0 ] );
@@ -97,15 +98,12 @@ $( function()
 					senseElem.css( "visibility", "visible" );
 				}
 			} );
-			senseCol.append( sense );
-			row.append( senseCol );
 
-			let result1Col = $( '<td class="result1Col"></td>');
+			let result1Col = $( clone.querySelector( ".result1Col" ) );
 			result1Col.click( function()
 			{
 				toggleResult( $( this ) );
 			} );
-			row.append( result1Col );
 
 			function toggleResult( element )
 			{
@@ -120,14 +118,13 @@ $( function()
 				}
 			}
 
-			let result2Col = $( '<td class="result2Col"></td>');
+			let result2Col = $( clone.querySelector( ".result2Col" ) );
 			result2Col.click( function()
 			{
 				toggleResult( $( this ) );
 			} );
-			row.append( result2Col );
 
-			wordInfoTable.append( row );
+			document.getElementById( "tableBody" ).appendChild( clone );
 		}
 	} );
 

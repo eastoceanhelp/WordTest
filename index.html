@@ -60,6 +60,7 @@ td {
       <div id="slideButtons">
         <button id="minus10">＜１０</button><button id="plus10">１０＞</button><button id="minus100">＜１００</button><button id="plus100">１００＞</button>
       </div>
+
       <table id="wordInfoTable">
         <thead>
           <tr>
@@ -80,6 +81,17 @@ td {
         <tbody id="tableBody">
         </tbody>
       </table>
+
+      <template id="wordRowTemplate">
+          <tr class="wordRow">
+            <td class="no"></td>
+            <td class="word"></td>
+            <td class="senseCol"><span class="sense"></span></td>
+            <td class="result1Col"></td>
+            <td class="result2Col"></td>
+          </tr>
+      </template>
+
     </div>
   </div>
 
