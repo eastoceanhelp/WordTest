@@ -1,7 +1,7 @@
-let allWordInfos;
-
 $( function()
 {
+	let allWordInfos;
+
 	$( "#dataFile" ).change( function()
 	{
 		let dataFile = $( this )[ 0 ].files[ 0 ];
@@ -10,6 +10,11 @@ $( function()
 		reader.onload = function()
 		{
 			allWordInfos = JSON.parse( reader.result )[ "wordInfos" ];
+			let minNo = parseInt( allWordInfos[ 0 ][ "no" ] );
+			$( "#minNo" ).text( minNo );
+
+			let maxNo = parseInt( allWordInfos[ allWordInfos.length - 1 ][ "no" ] );
+			$( "#maxNo" ).text( maxNo );
 		};
 	} );
 
